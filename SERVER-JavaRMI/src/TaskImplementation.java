@@ -25,10 +25,22 @@ public class TaskImplementation implements Task {
     }
 
     @Override
-    public ResultType prime() {
+    public ResultType work() {
         ResultType res = new ResultType();
-
         long start=System.currentTimeMillis();
+
+
+        long stop=System.currentTimeMillis();
+
+        prime(res);
+        med(res);
+        res.duration = stop - start;
+        res.time = LocalDateTime.now().toString();
+        return res;
+    }
+
+
+    private ResultType prime(ResultType res) {
 
         long max_prime = 0;
         long count = 0;
@@ -38,32 +50,20 @@ public class TaskImplementation implements Task {
                 max_prime = Math.max(max_prime, i);
             }
         }
-
-        long stop=System.currentTimeMillis();
-
         res.count = count;
         res.max = max_prime;
-        res.duration = stop - start;
-        res.time = LocalDateTime.now().toString();
         return res;
     }
 
-    @Override
-    public ResultType med() {
-        ResultType res = new ResultType();
+    private ResultType med(ResultType res) {
+
         Random rd = new Random();
-        long start=System.currentTimeMillis();
 
         LongStream ls = rd.longs(10000001, x, y+1);
-
         long[] randoms = ls.sorted().toArray();
         long mediana = randoms[randoms.length/2];
 
-        long stop=System.currentTimeMillis();
-
         res.med = mediana;
-        res.duration = stop - start;
-        res.time = LocalDateTime.now().toString();
         return res;
     }
 

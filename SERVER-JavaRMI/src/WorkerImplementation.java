@@ -7,12 +7,7 @@ public class WorkerImplementation extends UnicastRemoteObject implements Worker 
     }
 
     @Override
-    public ResultType prime(Task task) throws RemoteException {
-        return task.prime();
-    }
-
-    @Override
-    public ResultType med(Task task) throws RemoteException {
-        return task.med();
+    public ResultType work(Task task) throws RemoteException {
+        return task.work();
     }
 }
