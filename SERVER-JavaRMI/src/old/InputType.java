@@ -1,3 +1,5 @@
+package old;
+
 import java.io.Serializable;
 
 public class InputType implements Serializable {
