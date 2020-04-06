@@ -12,6 +12,17 @@ public class TaskImplementation implements Task {
     long x;
     long y;
 
+    public TaskImplementation(long x, long y) {
+        if (x < 0 || y < 0){
+            throw new IllegalArgumentException("params should be positive");
+        }
+        if(y-x < 100){
+            throw new IllegalArgumentException("y should be greater than x by 100 at least");
+        }
+        this.x = x;
+        this.y = y;
+
+    }
 
     @Override
     public ResultType prime() {
