@@ -21,4 +21,13 @@ public class ResultType implements Serializable {
         this.time = time;
     }
 
+    @Override
+    public String toString() {
+        return "Rezultat:\n" +
+                "ile liczb pierwszych: " + count +
+                "\nnajwieksza liczba pierwsza: " + max +
+                "\nmediana losowań: " + med +
+                "\nczas trwania w ms: " + duration +
+                "\nkoniec wykonywania: " + time + '\n';
+    }
 }

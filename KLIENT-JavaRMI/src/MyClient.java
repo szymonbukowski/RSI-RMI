@@ -1,3 +1,4 @@
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,14 +9,30 @@ public class MyClient {
 
         int tasksNumb = readTaskNumbers(4);
         ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<ResultType> results = new ArrayList<>();
         for(int i=0; i<tasksNumb; i++){
             tasks.add(readTask(i));
         }
 
         for(int i=1; i<=tasks.size();i++){
+            ResultType result = new ResultType();
             if(i%2==0){
-                w1.work(tasks.get(i-1));
+                try {
+                    result = w1.work(tasks.get(i-1));
+                } catch (RemoteException e) {
+                    System.out.println("ERROR");
+                    e.printStackTrace();
+                }
+            }else{
+                try {
+                    result = w2.work(tasks.get(i-1));
+                } catch (RemoteException e) {
+                    System.out.println("ERROR");
+                    e.printStackTrace();
+                }
             }
+            System.out.println("Wynik dla " +((TaskImplementation)tasks.get(i-1)).toString());
+            System.out.println((ResultType)result);
         }
 
     }
@@ -76,7 +93,7 @@ public class MyClient {
                     local_incorrect = false;
                 }
             }
-            if(y-x>100){
+            if(y-x>=100){
                 incorrect = false;
             }else{
                 System.out.println("podano liczby niespelniajace warunków zadania wprowadz poprawne");

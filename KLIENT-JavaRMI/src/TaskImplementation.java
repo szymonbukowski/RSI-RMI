@@ -24,13 +24,11 @@ public class TaskImplementation implements Task {
     @Override
     public ResultType work() {
         ResultType res = new ResultType();
+
         long start=System.currentTimeMillis();
-
-
-        long stop=System.currentTimeMillis();
-
         prime(res);
         med(res);
+        long stop=System.currentTimeMillis();
         res.duration = stop - start;
         res.time = LocalDateTime.now().toString();
         return res;
@@ -59,7 +57,6 @@ public class TaskImplementation implements Task {
         LongStream ls = rd.longs(10000001, x, y+1);
         long[] randoms = ls.sorted().toArray();
         long mediana = randoms[randoms.length/2];
-
         res.med = mediana;
         return res;
     }
@@ -69,5 +66,12 @@ public class TaskImplementation implements Task {
             if(suspect%i==0)return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Task " +
+                "x=" + x +
+                ", y=" + y;
     }
 }

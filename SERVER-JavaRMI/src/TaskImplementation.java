@@ -27,13 +27,13 @@ public class TaskImplementation implements Task {
     @Override
     public ResultType work() {
         ResultType res = new ResultType();
+
         long start=System.currentTimeMillis();
-
-
-        long stop=System.currentTimeMillis();
-
         prime(res);
         med(res);
+        long stop=System.currentTimeMillis();
+        System.out.println(start + "\n" + stop);
+        System.out.println(stop - start);
         res.duration = stop - start;
         res.time = LocalDateTime.now().toString();
         return res;
